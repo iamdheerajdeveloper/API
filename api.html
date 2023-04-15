@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars API</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+  <h1 class="text-center mt-3 text-primary">Car API</h1>
+  <div class="row mx-0 my-5 mypanel">
+   
+  </div>
+</body>
+
+
+
+<script>
+  $.getJSON('https://zresh.in/api/all-vehicle', function (data) {
+
+    var output = data.data;
+    var htmldata = '';
+    $.each(output, function (key, value) {
+
+        htmldata += '<div class="col-lg-4"><div class="card shadow p-3 mb-5 bg-body rounded" style = "width: 18rem;" ><img src="'+value['main_image']+ '" class="card-img-top" alt="..."><div class="card-body"><h5 class="card-title">'+ value['make']  +' '+ value['model'] + '</h5><p class="card-text">Condition : '+value['condition']+ '</div><ul class="list-group list-group-flush"><li class="list-group-item"><h5 class="text-primary">Price</h5> '+value['price']+ '</li>';
+         
+          if(value['sold_date'] !=''){
+            htmldata += '<li class="list-group-item">'+value['sold_date']+ '</li></ul></div></div > ';
+          }else{
+            htmldata += 'No sold date ';
+          }
+
+      });
+      $(".mypanel").html(htmldata);
+
+
+  
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</html>
